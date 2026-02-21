@@ -12,7 +12,7 @@ function App() {
           {/* <img src={} className="logo" alt="Vite logo" /> */}
         </a>
       </div>
-      <h1>Probando cositas de nuevo</h1>
+      <h1 className='text-red-500 font-bold p-4'>Probando cositas de nuevo</h1>
       <div className="card">
         <TodoList />
       </div>
