@@ -17,6 +17,9 @@ function App() {
     setTodos(prev => [...prev, newTodo])
     setNextId(prev => prev + 1)
   }
+  const deleteTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
 
   return (
     <div className="grid grid-rows-[auto_1fr] min-h-screen min-w-screen">
@@ -27,7 +30,7 @@ function App() {
       <div className="flex justify-center items-center gap-8 mb-35">
         <section className="maw-w-md">
           <h2 className="text-stone-200 mb-5">Lista de tareas</h2>
-          <TodoList todos={todos} />
+          <TodoList todos={todos} onDelete={deleteTodo}/>
         </section>
 
         <section className="maw-w-md">
