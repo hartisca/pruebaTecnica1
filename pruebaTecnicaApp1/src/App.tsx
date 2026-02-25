@@ -1,28 +1,41 @@
-import { useState } from 'react'
-import TodoList from './components/TodoList/TodoList'
-import AddTodo from './components/AddTodo/AddTodo'
-import './App.css'
+import { useState } from "react"
+import type { Todo } from "./types/todo"
+import TodoList from "./components/TodoList/TodoList"
+import AddTodo from "./components/AddTodo/AddTodo"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [nextId, setNextId] = useState(1)
+
+  const addTodo = (title: string) => {
+    const newTodo: Todo = {
+      id: nextId,
+      title,
+      completed: false,
+    }
+
+    setTodos(prev => [...prev, newTodo])
+    setNextId(prev => prev + 1)
+  }
 
   return (
-    <>
-      <div className="grid grid-rows-[auto_1fr] min-h-screen">
-        <h1 className='text-stone-200 font-bold p-4 text-center mt-9 underline'>My To Do List</h1>
-  
-        <div className="flex justify-center items-center gap-8 mb-35">
-          <section>
-            <h2 className='text-stone-200 mb-5'>Lista de tareas</h2>
-            <TodoList />
-          </section>
-          <section>
-            <h2 className='text-stone-200 mb-5'>Añadir nueva tarea</h2>
-            <AddTodo />
-          </section>
-        </div>
-      </div> 
-    </>
+    <div className="grid grid-rows-[auto_1fr] min-h-screen min-w-screen">
+      <h1 className="text-stone-200 font-bold p-4 text-center mt-9 underline">
+        My To Do List
+      </h1>
+
+      <div className="flex justify-center items-center gap-8 mb-35">
+        <section className="maw-w-md">
+          <h2 className="text-stone-200 mb-5">Lista de tareas</h2>
+          <TodoList todos={todos} />
+        </section>
+
+        <section className="maw-w-md">
+          <h2 className="text-stone-200 mb-5">Añadir nueva tarea</h2>
+          <AddTodo onAdd={addTodo} />
+        </section>
+      </div>
+    </div>
   )
 }
 
