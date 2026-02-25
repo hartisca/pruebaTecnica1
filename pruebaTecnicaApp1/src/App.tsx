@@ -21,6 +21,14 @@ function App() {
     setTodos(prev => prev.filter(todo => todo.id !== id))
   }
 
+  const onComplete = (id: number) => {
+  setTodos(prev =>
+    prev.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    )
+  )
+}
+
   return (
     <div className="grid grid-rows-[auto_1fr] min-h-screen min-w-screen">
       <h1 className="text-stone-200 font-bold p-4 text-center mt-9 underline">
@@ -28,9 +36,9 @@ function App() {
       </h1>
 
       <div className="flex justify-center items-center gap-8 mb-35">
-        <section className="maw-w-md">
+        <section>
           <h2 className="text-stone-200 mb-5">Lista de tareas</h2>
-          <TodoList todos={todos} onDelete={deleteTodo}/>
+          <TodoList todos={todos} onDelete={deleteTodo} onComplete={onComplete} />
         </section>
 
         <section className="maw-w-md">
