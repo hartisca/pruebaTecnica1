@@ -6,7 +6,7 @@ interface Props {
 
 const TodoItem = ({todo}: Props) => {
   return (
-    <li className='w-100 max-w-100 p-3.5 break-words text-stone-200 border-b-1 border-collapse'>
+    <li className='w-100 max-w-100 p-3.5 wrap-break-word text-stone-200 border-b border-collapse'>
       <input 
         type='checkbox'
         checked={todo.completed}        

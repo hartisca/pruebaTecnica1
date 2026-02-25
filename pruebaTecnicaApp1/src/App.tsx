@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TodoList from './components/TodoList/TodoList'
+import AddTodo from './components/AddTodo/AddTodo'
 import './App.css'
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           </section>
           <section>
             <h2 className='text-stone-200 mb-5'>Añadir nueva tarea</h2>
-
+            <AddTodo />
           </section>
         </div>
       </div> 
