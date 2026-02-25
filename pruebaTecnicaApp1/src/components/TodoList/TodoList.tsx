@@ -1,14 +1,23 @@
-import React from 'react'
 import TodoItem from '../TodoItem/TodoItem'
+import type { Todo } from '../../types/todo'
 
-const TodoList = () => {
+interface TodoListProps {
+  todos: Todo[]
+}
+
+const data = [
+  {id: '1', title: 'Do something', completed: false},
+  {id: '2', title: 'Do dishes', completed: false},
+  {id: '3', title: 'Kill someone', completed: true},
+]
+
+const TodoList = ({ todos }: TodoListProps) => {
   return (
     <>
-     <ul>
-      <li>Comprar el pan</li>
-      <li>Ver pelicula</li>
-      <li>Observar una carrera de pelusas</li>
-      <li>Instalar algun videojuego nuevo</li>
+     <ul className='border rounded-2xl border-stone-300 min-h-120'>
+      {data.map(todo => (
+        <TodoItem key={todo.id} todo={todo} />
+      ))}
      </ul>
      
     </>   
