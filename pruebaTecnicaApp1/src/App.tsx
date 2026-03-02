@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Todo } from "./types/todo"
 import TodoList from "./components/TodoList/TodoList"
 import AddTodo from "./components/AddTodo/AddTodo"
+import { setItemStorage, getItemStorage } from "./utils/localStorage"
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Todo[]>(() => getItemStorage());
   const [nextId, setNextId] = useState(1)
 
   const addTodo = (title: string) => {
@@ -17,6 +18,7 @@ function App() {
     setTodos(prev => [...prev, newTodo])
     setNextId(prev => prev + 1)
   }
+
   const deleteTodo = (id: number) => {
     setTodos(prev => prev.filter(todo => todo.id !== id))
   }
@@ -28,6 +30,11 @@ function App() {
     )
   )
 }
+
+  // Guardar todos en localStorage cada vez que cambian
+  useEffect(() => {
+    setItemStorage({ todos });
+  }, [todos]);
 
   return (
     <div className="grid grid-rows-[auto_1fr] min-h-screen min-w-screen">
