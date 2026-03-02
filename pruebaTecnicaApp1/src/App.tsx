@@ -5,18 +5,18 @@ import AddTodo from "./components/AddTodo/AddTodo"
 import { setItemStorage, getItemStorage } from "./utils/localStorage"
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>(() => getItemStorage());
-  const [nextId, setNextId] = useState(1)
+  const [todos, setTodos] = useState<Todo[]>(() => getItemStorage());  
 
   const addTodo = (title: string) => {
+    const newId = todos.length > 0 ? Math.max(...todos.map(t => t.id)) + 1 : 1;
+
     const newTodo: Todo = {
-      id: nextId,
+      id: newId,
       title,
       completed: false,
     }
 
-    setTodos(prev => [...prev, newTodo])
-    setNextId(prev => prev + 1)
+    setTodos(prev => [...prev, newTodo]);
   }
 
   const deleteTodo = (id: number) => {
@@ -24,12 +24,12 @@ function App() {
   }
 
   const onComplete = (id: number) => {
-  setTodos(prev =>
-    prev.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
     )
-  )
-}
+  }
 
   // Guardar todos en localStorage cada vez que cambian
   useEffect(() => {
